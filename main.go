@@ -36,6 +36,7 @@ func main() {
 	mqttPort := flag.Int("p", 1883, "MQTT server port")
 	mqttUsername := flag.String("u", "", "MQTT username")
 	mqttPassword := flag.String("P", "", "MQTT password")
+	mqttTopic := flag.String("t", "homeassistant/ud_cos2", "MQTT topic name")
 	flag.Parse()
 
 	clientID := uuid.New().String()
@@ -53,7 +54,7 @@ func main() {
 	}
 	defer client.Disconnect(250)
 
-	go startSerial("/dev/ttyACM0", client)
+	go startSerial("/dev/ttyACM0", client, *mqttTopic)
 
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, syscall.SIGHUP)
@@ -75,7 +76,7 @@ func main() {
 	fmt.Println("Program stopped")
 }
 
-func startSerial(dev string, client mqtt.Client) {
+func startSerial(dev string, client mqtt.Client, topic string) {
 	cfg := &serial.Config{Name: dev, Baud: 115200, ReadTimeout: time.Second * 6}
 	s, err := serial.OpenPort(cfg)
 	if err != nil {
@@ -126,7 +127,7 @@ func startSerial(dev string, client mqtt.Client) {
 				continue
 			}
 
-			token := client.Publish("homeassistant/ud_cos2", 0, false, jsonData)
+			token := client.Publish(topic, 0, false, jsonData)
 			token.Wait()
 			if token.Error() != nil {
 				fmt.Println("Error publishing to MQTT:", token.Error())
