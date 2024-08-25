@@ -93,8 +93,8 @@ mqtt: !include mqtt.yaml
 [homeassistant/mqtt.yaml](homeassistant/mqtt.yaml) を（なければ）同じディレクトリにおいてください。ある場合は書き足せば動くんじゃないですかね…。
 
 詳細は公式マニュアルを参照してください。
-- [https://www.home-assistant.io/integrations/mqtt/]
-- [https://www.home-assistant.io/integrations/sensor.mqtt/]
+- https://www.home-assistant.io/integrations/mqtt/
+- https://www.home-assistant.io/integrations/sensor.mqtt/
 
 ## 注意点
 
