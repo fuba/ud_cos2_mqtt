@@ -1,15 +1,22 @@
 sensor:
   - name: "CO2 Level"
+    unique_id: ud_cos2_co2ppm
     state_topic: "homeassistant/ud_cos2"
     unit_of_measurement: "ppm"
     value_template: "{{ value_json.co2ppm }}"
-  
+    state_class: measurement
+    device_class: carbon_dioxide
   - name: "Humidity"
+    unique_id: ud_cos2_humidity
     state_topic: "homeassistant/ud_cos2"
     unit_of_measurement: "%"
     value_template: "{{ value_json.humidity }}"
-  
+    state_class: measurement
+    device_class: humidity
   - name: "Temperature"
+    unique_id: ud_cos2_temperature
     state_topic: "homeassistant/ud_cos2"
     unit_of_measurement: "°C"
     value_template: "{{ value_json.temperature }}"
+    state_class: measurement
+    device_class: temperature
