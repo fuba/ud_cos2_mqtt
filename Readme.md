@@ -29,6 +29,18 @@
 /usr/local/bin/ud_cos2_mqtt -h example.com -p 1883 -u myuser -P mypassword
 ```
 
+### 環境変数のサポート
+
+`ud_cos2_mqtt` はコマンドラインオプションに加えて、以下の環境変数もサポートしています:
+
+- `MQTT_SERVER`: MQTTブローカーのホスト名またはIPアドレス。
+- `MQTT_PORT`: MQTTブローカーのポート番号。
+- `MQTT_USERNAME`: MQTTブローカーのユーザー名。
+- `MQTT_PASSWORD`: MQTTブローカーのパスワード。
+- `MQTT_TOPIC`: MQTT トピック名。
+
+環境変数を設定しておけば、コマンドラインオプションで指定しなくてもプログラムがこれらの設定を使用します。コマンドラインオプションが優先されます。
+
 ### MQTT ブローカーの設定
 
 MQTT ブローカーの設定は環境ファイルを通じて行われます。`ud_cos2_mqtt` は、センサーデータを指定された MQTT ブローカーに送信します。
@@ -103,4 +115,4 @@ mqtt: !include mqtt.yaml
 ## ライセンス
 
 このプロジェクトは、[MITライセンス](LICENSE)のもとで公開されています。
-だいたい ChatGPT が書きました。もともとのアイデアは[oquno のやつ](https://gist.github.com/oquno/d07f6dbf8cc760f2534d9914efe79801)です
+だいたい ChatGPT が書きました。もともとのアイデアは[oquno のやつ](https://gist.github.com/oquno/d07f6dbf8cc760f2534d9914efe79801)です。
