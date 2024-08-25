@@ -32,11 +32,11 @@ var currentData SensorData
 var running = true
 
 func main() {
-	mqttServer := flag.String("h", "localhost", "MQTT server hostname")
-	mqttPort := flag.Int("p", 1883, "MQTT server port")
-	mqttUsername := flag.String("u", "", "MQTT username")
-	mqttPassword := flag.String("P", "", "MQTT password")
-	mqttTopic := flag.String("t", "homeassistant/ud_cos2", "MQTT topic name")
+	mqttServer := flag.String("h", getEnv("MQTT_SERVER", "localhost"), "MQTT server hostname")
+	mqttPort := flag.Int("p", getEnvAsInt("MQTT_PORT", 1883), "MQTT server port")
+	mqttUsername := flag.String("u", getEnv("MQTT_USERNAME", ""), "MQTT username")
+	mqttPassword := flag.String("P", getEnv("MQTT_PASSWORD", ""), "MQTT password")
+	mqttTopic := flag.String("t", getEnv("MQTT_TOPIC", "homeassistant/ud_cos2"), "MQTT topic name")
 	flag.Parse()
 
 	clientID := uuid.New().String()
@@ -138,4 +138,22 @@ func startSerial(dev string, client mqtt.Client, topic string) {
 	if err != nil {
 		fmt.Println("Error writing to serial port:", err)
 	}
+}
+
+// getEnv は、環境変数の値を取得し、存在しない場合はデフォルト値を返します。
+func getEnv(key string, defaultValue string) string {
+	if value, exists := os.LookupEnv(key); exists {
+		return value
+	}
+	return defaultValue
+}
+
+// getEnvAsInt は、環境変数の値を整数として取得し、存在しない場合はデフォルト値を返します。
+func getEnvAsInt(key string, defaultValue int) int {
+	if valueStr, exists := os.LookupEnv(key); exists {
+		if value, err := strconv.Atoi(valueStr); err == nil {
+			return value
+		}
+	}
+	return defaultValue
 }
