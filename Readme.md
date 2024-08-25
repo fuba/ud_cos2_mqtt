@@ -90,7 +90,11 @@ configuration.yaml に mqtt 設定がなければ include します。
 mqtt: !include mqtt.yaml
 ```
 
-mqtt.yaml を（なければ）同じディレクトリにおいてください。
+[homeassistant/mqtt.yaml](homeassistant/mqtt.yaml) を（なければ）同じディレクトリにおいてください。ある場合は書き足せば動くんじゃないですかね…。
+
+詳細は公式マニュアルを参照してください。
+- [https://www.home-assistant.io/integrations/mqtt/]
+- [https://www.home-assistant.io/integrations/sensor.mqtt/]
 
 ## 注意点
 
@@ -99,3 +103,4 @@ mqtt.yaml を（なければ）同じディレクトリにおいてください�
 ## ライセンス
 
 このプロジェクトは、[MITライセンス](LICENSE)のもとで公開されています。
+だいたい ChatGPT が書きました。もともとのアイデアは[oquno のやつ](https://gist.github.com/oquno/d07f6dbf8cc760f2534d9914efe79801)です
