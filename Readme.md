@@ -3,7 +3,7 @@
 
 ## 使い方
 
-`ud_cos2_mqtt` は、シリアルポートからセンサーデータを取得し、MQTT ブローカーに送信するプログラムです。以下の方法で利用できます。
+`ud_cos2_mqtt` は、UD-COS2 からセンサーデータを取得し、MQTT ブローカーに送信するプログラムです。主に Home Assistant での利用を想定しています。以下の方法で利用できます。
 
 ### プログラムの実行
 
@@ -21,6 +21,7 @@
 - `-p`: MQTTブローカーのポートを指定します。デフォルトは `1883` です。
 - `-u`: MQTTブローカーのユーザー名を指定します。
 - `-P`: MQTTブローカーのパスワードを指定します。
+- `-t`: MQTT のトピックを指定します。デフォルトは `homeassistant/ud_cos2` です。
 
 例:
 
@@ -80,6 +81,16 @@ MQTT_PASSWORD=your_password
    ```bash
    journalctl -u ud_cos2_mqtt.service -n 30
    ```
+
+## Home Assistant での設定
+
+configuration.yaml に mqtt 設定がなければ include します。
+
+```yaml
+mqtt: !include mqtt.yaml
+```
+
+mqtt.yaml を（なければ）同じディレクトリにおいてください。
 
 ## 注意点
 
